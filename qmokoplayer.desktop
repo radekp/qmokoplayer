@@ -1,0 +1,10 @@
+[Translation]
+File=qmokoplayer-nct
+Context=Qmokoplayer
+
+[Desktop Entry]
+Comment[]=A multimedia player for QTmoko!!
+Exec=qmokoplayer
+Icon=qmokoplayer/219-Lefreut-foldermultimedia2.png
+Type=Application
+Name[]=qmokoplayer

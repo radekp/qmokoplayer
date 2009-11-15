@@ -1,0 +1,1 @@
+geany  qbuild.pro src/main.cpp src/accueil.cpp src/accueil.h src/radioplayer.cpp src/radioplayer.h src/radioplayeredit.cpp src/radioplayeredit.h src/options.cpp src/options.h
