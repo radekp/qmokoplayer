@@ -6,6 +6,7 @@ TARGET=qmokoplayer
 
 # This app uses Qtopia
 CONFIG+=qtopia
+DEFINES+=QTOPIA
 
 # Build this app as a quicklauncher plugin
 # You need to be using the QTOPIA_ADD_APPLICATION/QTOPIA_MAIN macros or this will not work!
@@ -21,10 +22,12 @@ LANGUAGES=en_US de
 # Package information (used for qbuild packages)
 pkg [
     name=qmokoplayer
-    desc="Example Application"
+    desc="QMokoPlayer, a multimedia player"
     license=GPLV3
-    version=0.1.0-1
+    version=0.2.0-1
     maintainer="Burn2 <info@qtextended.org>"
+    domain=window
+    devices=ficgta01,neo1973
 ]
 
 # These are the source files that get built to create the application
@@ -38,19 +41,21 @@ HEADERS=\
     src/accueil.h\
     src/radioplayer.h\
     src/radioplayeredit.h\
-    src/options.h
+    src/options.h\
+    src/qmplayer.h
 
 SOURCES=\
     src/main.cpp\
     src/accueil.cpp\
     src/radioplayer.cpp\
     src/radioplayeredit.cpp\
-    src/options.cpp
+    src/options.cpp\
+    src/qmplayer.cpp
 
 # SXE information
 target [
     hint=sxe
-    domain=untrusted
+    domain=trusted
 ]
 
 # Install the launcher item. The metadata comes from the .desktop file

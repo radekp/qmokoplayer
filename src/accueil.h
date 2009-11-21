@@ -5,6 +5,7 @@
 #include "ui_accueil.h"
 #include "radioplayer.h"
 #include "options.h"
+#include "qmplayer.h"
 
 class Accueil : public QWidget, public Ui_Accueil
 {
@@ -15,9 +16,13 @@ public:
 
 private slots:
     void RadioButton_clicked();
+    void VideoButton_clicked();
     void options();
+    bool installMplayer();
+    bool download(QString url, QString destPath, QString filename, bool justCheck);
 private:
    RadioPlayer * m_r;
+   QMplayer * m_v;
    Options * m_o; 
 };
 
