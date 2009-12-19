@@ -1,0 +1,29 @@
+Afterhours.FM [Trance/Livesets]|http://www.ah.fm/192k.m3u
+Bassdrive [Drum \'n Bass]|http://www.bassdrive.com/v2/streams/BassDrive.m3u
+Bluemars [Ambient/Space-Music]|http://207.200.96.225:8020/listen.pls
+Darkerradio [Alternative/Indie/Goth/Wave]|http://www.darkerradio.com/listen.pls
+Digitally Imported - Chillout [Chill-Out]|http://di.fm/mp3/classictechno.pls
+Digitally Imported - Classic Techno [Techno]|http://di.fm/mp3/classictechno.pls
+Digitally Imported - Trance [Trance]|http://di.fm/mp3/trance.pls
+Evolved.fm [Techno/Trance]|http://vhost.desync.com/evolved.pls
+Frequence 3 [Pop]|http://streams.frequence3.net/hd-mp3.m3u
+Frequence3 Low|http://streams.frequence3.net/mp3-24-firewall.m3u
+Kohina [Computer-Music]|http://la.campus.ltu.se:8000/stream.ogg.m3u
+Mostly Classical [Classical]|http://www.sky.fm/mp3/classical.pls
+MTH.Electro [Minimal Techno]|http://www.shouted.fm/tunein/electro-dsl.m3u
+MTH.House [House]|http://stream.mth-house.de:8500/listen.pls
+Nectarine Demoscene Radio [Computer-Music]|http://demovibes.de:8000/necta128.ogg
+Oxy Radio|http://www.oxyradio.net/listen/hd-mp3.pls
+Philosomatika [Psytrance]|http://yp.shoutcast.com/sbin/tunein-station.pls?id=5628
+Proton Radio [House/Dance]|http://protonradio.com/proton.m3u
+Pure DJ [Trance]|http://www.puredj.com/etc/pls/128K.pls
+Radio Metz Rock|http://91.121.165.219:8023
+Radio Paradise [Rock/Pop/Alternative]|http://www.radioparadise.com/musiclinks/rp_128.m3u
+Raggakings [Reggae]"|http://www.raggakings.net/listen.m3u
+SLAY Radio [C64 Remixes]|http://www.slayradio.org/tune_in.php/128kbps/listen.m3u
+SomaFM - Drone Zone [Ambient]|http://somafm.com/dronezone.pls
+SomaFM - Groove Salad [Chill-Out]|http://somafm.com/groovesalad.pls
+SomaFM - Indie Pop Rocks [Indie]|http://somafm.com/indiepop.pls
+SomaFM - Secret Agent [Downtempo/Lounge]|http://somafm.com/secretagent.pls
+SomaFM - Tags Trance Trip [Trance]|http://somafm.com/tagstrance.pls
+Virgin Radio [Rock/Pop]|http://www.smgradio.com/core/audio/mp3/live.pls?service=vrbb

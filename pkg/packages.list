@@ -1,0 +1,17 @@
+Package: qmokoplayer
+Filename: qmokoplayer_0.1.0-1_arm.qpk
+Size: 85120
+MD5Sum: 3c01438b2526745cd9ad7623103afec8
+Description: QMokoPlayer, a multimedia player
+Maintainer: Burn2 <info@qtextended.org>
+License: GPLV3
+Version: 0.1.0-1
+Trust: Untrusted
+Architecture: arm
+Domain: window
+QtopiaVersion: 4.4.0-4.4.3
+Devices: ficgta01,neo1973
+Type: generic
+File-Count: 11
+Installed-Size: 155535
+
