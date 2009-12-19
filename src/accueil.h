@@ -18,6 +18,7 @@ private slots:
     void RadioButton_clicked();
     void VideoButton_clicked();
     void options();
+    void upgrade();
     bool installMplayer();
     bool download(QString url, QString destPath, QString filename, bool justCheck);
 private:

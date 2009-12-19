@@ -21,6 +21,7 @@ Accueil::Accueil(QWidget *parent, Qt::WFlags f)
     // Construct context menu, available to the user via Qtopia's soft menu bar.
     QMenu *menu = QSoftMenuBar::menuFor(this);
 	menu->addAction(tr("Options"), this, SLOT(options()));
+	menu->addAction(tr("Upgrade mplayer"), this, SLOT(upgrade()));
     QAction *actionClose = new QAction(QIcon("close"),tr("Close"),this);
     connect(actionClose,SIGNAL(triggered()), this, SLOT(close()));
     connect(RadioButton,SIGNAL(clicked()), this, SLOT(RadioButton_clicked()));
@@ -53,19 +54,40 @@ Accueil::Accueil(QWidget *parent, Qt::WFlags f)
 
 }
 
+void Accueil::upgrade()
+{
+	 if(QMessageBox::question(this, tr("qmplayer"),
+                             tr("Program MPlayer must be downloaded. Please make sure you have internet connection and press yes to confirm download"),
+                             QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes)
+       {
+           if(installMplayer())
+           {
+               QMessageBox::information(this, tr("qmplayer"), tr("MPlayer installed sucessfully"));
+           }
+           else
+           	QMessageBox::warning(this, tr("qmplayer"), tr("Failed to install MPlayer"));
+       }
+	
+}
+
 
 //this fonction comes from qmplayer, add here what you want to add in the configuration of mplayer
 bool Accueil::installMplayer()
 {
     QDir::home().mkdir(".mplayer");
-    QFile f(QDir::homePath ()+"/.mplayer/config");
-    f.open(QFile::WriteOnly);
-    f.write("vo=glamo\n\n[default]\nafm=ffmpeg\nvfm=ffmpeg\nzoom=1\nnoautosub=1\nlavdopts=lowres=0:fast=0:skiploopfilter=no\nquiet=1\nosdlevel=0\n");
-    f.close();
-
+    if (QFile::exists(QDir::homePath ()+"/.mplayer/config"))
+		QFile::remove(QDir::homePath ()+"/.mplayer/config");
+	if (QFile::exists("/usr/bin/mplayer"))
+		QFile::remove("/usr/bin/mplayer");
     return download("http://72.249.85.183/radekp/qmplayer/download/mplayer",
                     "/usr/bin/mplayer", "mplayer", false) &&
     QFile::setPermissions("/usr/bin/mplayer", QFile::ReadOwner |
+                          QFile::WriteOwner | QFile::ExeOwner |
+                          QFile::ReadUser | QFile::ExeUser |
+                          QFile::ReadGroup | QFile::ExeGroup |
+                          QFile::ReadOther | QFile::ExeOther)&&download("http://alionet-repository.no-ip.info/QTMoko/config",
+                    QDir::homePath ()+"/.mplayer/config", "mplayer", false) &&
+    QFile::setPermissions(QDir::homePath ()+"/.mplayer/config", QFile::ReadOwner |
                           QFile::WriteOwner | QFile::ExeOwner |
                           QFile::ReadUser | QFile::ExeUser |
                           QFile::ReadGroup | QFile::ExeGroup |
@@ -75,6 +97,7 @@ bool Accueil::installMplayer()
 
 bool Accueil::download(QString url, QString destPath, QString filename, bool justCheck)
 {
+	Q_UNUSED(filename);
     QString host = url;
     QString reqPath;
     int port = 80;

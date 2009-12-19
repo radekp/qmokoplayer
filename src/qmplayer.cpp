@@ -3,6 +3,10 @@
 QMplayer::QMplayer(QWidget *parent, Qt::WFlags f)
     : QWidget(parent)
 {
+doubleclic= new QTimer(this);
+doubleclic->setSingleShot (true);
+m_marge=100;
+	
 #ifdef QTOPIA
     //this->setWindowState(Qt::WindowMaximized);
     setWindowFlags(windowFlags() | Qt::WindowStaysOnTopHint);
@@ -133,15 +137,75 @@ static QListWidgetItem *getDirItem(QListView *lw, QString dir)
     return res;
 }
 
+
+
 void QMplayer::mousePressEvent(QMouseEvent *event)
 {
-    Q_UNUSED(event);
-    if(screen == QMplayer::ScreenFullscreen)
-    {
-        showScreen(QMplayer::ScreenPlay);
-    }
+    m_x=event->x();
+    m_y=event->y();
 }
 
+
+
+
+void QMplayer::mouseReleaseEvent(QMouseEvent * event)
+{
+	if(processRunning(process))
+	{
+		int resultX;
+		int resultY;
+		resultX= m_x-event->x();
+		resultY= m_y-event->y();
+		
+		///Define the gesture done
+		///Screen is manualy rotated so Y=up/down ;)
+		//right side
+		if (resultY>0 && resultY>m_marge)
+		{
+			if(screen == QMplayer::ScreenStopped)
+					{
+						process->write("\x1b""[A ");
+					}
+		}
+		else
+		//left side
+			if (resultY<0 && resultY<(m_marge-(m_marge*2)))
+			{
+						if(screen == QMplayer::ScreenStopped)
+						{
+							process->write("\x1b""[B ");
+						}
+			}	
+			//it could only be up or down	
+			else	
+				//Up side
+				if (resultX>0 && resultX>m_marge)
+					 process->write("0");
+			
+				else
+					//Down side
+					if (resultX<0 && resultX<(m_marge-(m_marge*2)))
+						process->write("9");
+					//else it is only a clic or a double clic	
+					else
+					{
+						//two clic stop
+						if (doubleclic->isActive ())
+							backClicked();
+						else
+							{
+								doubleclic->start(1000);
+								 ///define the gesture	
+								 
+									//one clic => pause	
+									{
+										okClicked();
+									} 
+								
+								}
+						}
+			}
+}
 void QMplayer::okClicked()
 {
     if(screen == QMplayer::ScreenInit)
@@ -438,10 +502,10 @@ void QMplayer::backClicked()
     {
         close();
     }
-    else if(screen == QMplayer::ScreenPlay)
+    /*else if(screen == QMplayer::ScreenPlay)
     {
         showScreen(QMplayer::ScreenFullscreen);
-    }
+    }*/
     else if(screen == QMplayer::ScreenStopped)
     {
         process->write("q");
@@ -500,10 +564,10 @@ void QMplayer::showScreen(QMplayer::Screen scr)
     this->screen = scr;
 
     lw->setVisible(scr == QMplayer::ScreenInit);
-    bOk->setVisible(scr == QMplayer::ScreenInit || scr == QMplayer::ScreenPlay || scr == QMplayer::ScreenStopped || scr == QMplayer::ScreenConnect);
-    bBack->setVisible(scr == QMplayer::ScreenInit || scr == QMplayer::ScreenPlay || scr == QMplayer::ScreenStopped || QMplayer::ScreenScan || scr == QMplayer::ScreenConnect);
-    bUp->setVisible(scr == QMplayer::ScreenPlay || scr == QMplayer::ScreenStopped);
-    bDown->setVisible(scr == QMplayer::ScreenPlay || scr == QMplayer::ScreenStopped);
+    bOk->setVisible(scr == QMplayer::ScreenInit || scr == QMplayer::ScreenConnect);
+    bBack->setVisible(scr == QMplayer::ScreenInit || scr == QMplayer::ScreenConnect);
+    bUp->setVisible(false);
+    bDown->setVisible(false);
     label->setVisible(scr == QMplayer::ScreenScan || scr == QMplayer::ScreenDownload || scr == QMplayer::ScreenConnect);
     lineEdit->setVisible(scr == QMplayer::ScreenConnect);
     progress->setVisible(scr == QMplayer::ScreenScan || scr == QMplayer::ScreenDownload);
@@ -525,7 +589,7 @@ void QMplayer::showScreen(QMplayer::Screen scr)
             break;
         case QMplayer::ScreenFullscreen:
 #ifdef QTOPIA
-            setRes(320240);
+            //setRes(320240);
 #endif
             break;
         case QMplayer::ScreenStopped:
