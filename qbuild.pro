@@ -24,7 +24,7 @@ pkg [
     name=qmokoplayer
     desc="QMokoPlayer, a multimedia player"
     license=GPLV3
-    version=0.2.0-2
+    version=0.2.1-1
     maintainer="Burn2 <9700pro2@voila.fr>"
     domain=window
     devices=ficgta01,neo1973
@@ -43,6 +43,7 @@ HEADERS=\
     src/radioplayeredit.h\
     src/options.h\
     src/qmplayer.h
+
 
 SOURCES=\
     src/main.cpp\
