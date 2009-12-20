@@ -19,12 +19,16 @@
 #include <QTcpSocket>
 #include <QTextCodec>
 #include <QLineEdit>
+#include <QTimer>
+#include <QGestureEvent>
+
 #ifdef QTOPIA
 #include <QtopiaApplication>
 #endif
 #ifdef Q_WS_WIN
 #include <Windows.h>
 #endif
+
 
 class QMplayer : public QWidget
 {
@@ -45,7 +49,7 @@ private:
         ScreenDownload,
         ScreenConnect,
     };
-
+    
     Screen screen;
     int maxScanLevel;
     int delTmpFiles;
@@ -64,7 +68,11 @@ private:
     QProcess* process;
     QProgressBar *progress;
     QTcpServer *tcpServer;
-
+    QTimer * doubleclic;
+    int m_marge;
+	int m_x;
+	int m_y;
+ 
     void showScreen(QMplayer::Screen scr);
     void scan();
     int scanDir(QString const& path, int level, int maxLevel, int min, int max, bool followSymLinks);
@@ -78,6 +86,7 @@ private:
 
 protected:
     void mousePressEvent(QMouseEvent * event);
+    void mouseReleaseEvent(QMouseEvent * event);
 
 private slots:
     void okClicked();
